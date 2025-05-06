@@ -4,7 +4,7 @@ const dbPromise=require('../db');
 
 const userCollectionName='users';
 
-exports.require=async (req,res)=>{
+exports.register=async (req,res)=>{
     try {
         const db=await dbPromise;
         const{username,password}=req.body;
@@ -49,7 +49,7 @@ exports.login=async(req,res)=>{
         const paswordMatch= await bcrypt.compare(password, user.password);
 
        if (paswordMatch) {
-        res.status(200),json({message: 'Autenticacion satisfactoria', userId: user._id});
+        res.status(200).json({message: 'Autenticacion satisfactoria', userId: user._id});
         
        } else {
         res.status(401).json({error:'Error en la autenticacion'});
